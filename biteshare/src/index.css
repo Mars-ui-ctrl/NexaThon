@@ -3,6 +3,7 @@
   --bg-color: #f4f7f6;
   --text-dark: #2c3e50;
   --card-bg: #ffffff;
+  --remove-red: #FF0000;
 }
 
 * {
@@ -154,4 +155,27 @@ align-items: center;
   margin-top: 10px;
   font-weight: bold;
   color: #e74c3c;
+}
+/* Styling for the remove button section */
+.claimed-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.btn-remove {
+  /* background-color: var(--remove-red); */
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-remove:hover {
+  background-color: #7c160b;
 }

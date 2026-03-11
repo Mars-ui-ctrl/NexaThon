@@ -25,6 +25,9 @@ function App() {
     ));
     alert("Food claimed successfully! An email has been sent to the donor.");
   };
+  const handleRemove = (id) => {
+    setFoodItems(foodItems.filter(item => item.id !== id));
+  };
   
 
   return (
@@ -46,11 +49,12 @@ function App() {
               type="text" 
               placeholder="Food Type (e.g. Rice & Dal)" 
               value={newFood.type}
-              onChange={(e) => setNewFood({ ...newFood, type: e.target.value })}
+              onChange={(e) => setNewFood({ ...newFood, type: e.target.value.replace(/[0-9]/g, '') })}
               required
             />
             <input 
-              type="text" 
+              type="number" 
+              min= "1"
               placeholder="Quantity (e.g. 50 plates)" 
               value={newFood.quantity}
               onChange={(e) => setNewFood({ ...newFood, quantity: e.target.value })}
@@ -77,12 +81,18 @@ function App() {
                 <p><strong>Quantity:</strong> {item.quantity}</p>
                 <p><strong>Location:</strong> {item.location}</p>
                 
+         
                 {item.status === "Available" ? (
                   <button onClick={() => handleClaim(item.id)} className="btn-claim">
                     Claim Food
                   </button>
                 ) : (
-                  <span className="status-claimed">🔴 Claimed</span>
+                  <div className="claimed-actions">
+                    <span className="status-claimed">🔴 Claimed</span>
+                    <button onClick={() => handleRemove(item.id)} className="btn-remove">
+                      Remove
+                    </button>
+                  </div>
                 )}
               </div>
             ))}
