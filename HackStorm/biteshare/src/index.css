@@ -1,181 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
-  --primary-color: #2ecc71;
-  --bg-color: #f4f7f6;
-  --text-dark: #2c3e50;
-  --card-bg: #ffffff;
-  --remove-red: #FF0000;
+  --primary: #10b981; /* Neon Emerald for contrast */
+  --primary-hover: #059669;
+  --bg-dark: #0f172a; 
+  --bg-gradient: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%);
+  --text-main: #f8fafc; /* White/Light Grey text */
+  --text-muted: #94a3b8;
+  
+  /* Glass Variables */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: blur(12px);
+  --radius: 16px;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-dark);
+  background: var(--bg-gradient);
+  background-attachment: fixed; /* Keeps gradient smooth when scrolling */
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
 
 .app-container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px 20px;
 }
 
+/* --- GLASSMORPHISM UTILITY CLASS --- */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* --- HEADER & NAV --- */
 .navbar {
-  text-align: center;
-  margin-bottom: 40px;
-  padding: 20px;
-  background-color: var(--card-bg);
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
   display: flex;
-  justify-content: center;
-  text-align: center;
+  justify-content: space-between;
   align-items: center;
-}
-.navbar h1{
-    color: var(--primary-color);
-    font-size: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-.heading-logo{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-align-items: center;
+  padding: 20px 30px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-.navbar h1 {
-  color: var(--primary-color);
-  font-size: 2.5rem;
-}
-
-.main-content {
+.heading-logo h1 {
   display: flex;
-  flex-direction: column;
-  gap: 40px;
+  align-items: center;
+  color: var(--text-main);
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
 }
 
-.donate-section, .dashboard-section {
-  background-color: var(--card-bg);
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-
-.donate-section h2, .dashboard-section h2 {
-  margin-bottom: 20px;
-  border-bottom: 2px solid var(--primary-color);
-  display: inline-block;
-  padding-bottom: 5px;
-}
-
-.donate-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.donate-form input {
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+.heading-logo p {
+  color: var(--primary);
   font-size: 1rem;
+  font-weight: 600;
+  margin-top: 4px;
 }
 
-.btn-primary, .btn-claim {
-  padding: 12px;
+.role-toggle {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px;
+  border-radius: 12px;
+  display: flex;
+  gap: 5px;
+  border: 1px solid var(--glass-border);
+}
+
+.tab-btn {
   border: none;
-  border-radius: 6px;
-  color: white;
-  font-weight: bold;
+  background: transparent;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--text-muted);
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
 }
 
-.btn-primary {
-  background-color: var(--primary-color);
-  font-size: 1.1rem;
+.tab-btn:hover { color: var(--text-main); }
+.tab-btn.active {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
 }
 
-.btn-primary:hover {
-  background-color: #27ae60;
+/* --- ANIMATION --- */
+.slide-in { animation: slideUpFade 0.4s ease forwards; }
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- DONOR FORM --- */
+.donate-section, .dashboard-section { padding: 40px; }
+h2 { font-size: 1.8rem; margin-bottom: 8px; }
+.subtitle { color: var(--text-muted); margin-bottom: 30px; font-size: 1.05rem; }
+
+.donate-form { display: flex; flex-direction: column; gap: 20px; }
+.input-group { display: flex; flex-direction: column; gap: 8px; }
+.input-group label { font-size: 0.95rem; font-weight: 600; color: var(--text-muted); }
+
+.input-group input {
+  padding: 14px 18px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-group input::placeholder { color: #64748b; }
+.input-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+/* --- NGO DASHBOARD & CARDS --- */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 20px;
+}
+
+.live-indicator {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--primary);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
 }
 
 .food-card {
-  border: 1px solid #eee;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #fafafa;
-  transition: transform 0.2s;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: all 0.3s ease;
 }
 
 .food-card:hover {
   transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.food-card h3 {
-  margin-bottom: 10px;
-  color: var(--text-dark);
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.card-header h3 { font-size: 1.25rem; color: var(--primary); }
+.time-posted {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 12px;
 }
 
-.food-card p {
-  margin-bottom: 8px;
-  color: #555;
-}
+.card-body p { margin-bottom: 8px; color: var(--text-muted); font-size: 0.95rem; }
+.card-body strong { color: var(--text-main); }
+.card-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--glass-border); }
 
-.btn-claim {
-  background-color: #e67e22;
+.claimed-card { opacity: 0.5; filter: grayscale(50%); }
+
+.claimed-actions { display: flex; justify-content: space-between; align-items: center; }
+.status-claimed { color: var(--primary); font-weight: 700; }
+
+.empty-state { text-align: center; padding: 60px 20px; }
+
+/* --- BUTTONS --- */
+.btn-primary, .btn-claim {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
   width: 100%;
-  margin-top: 10px;
+  background: var(--primary);
+  color: #fff;
 }
 
-.btn-claim:hover {
-  background-color: #d35400;
-}
-
-.claimed-card {
-  opacity: 0.6;
-}
-
-.status-claimed {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
-  color: #e74c3c;
-}
-/* Styling for the remove button section */
-.claimed-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 15px;
+.btn-primary:hover, .btn-claim:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+  transform: translateY(-2px);
 }
 
 .btn-remove {
-  /* background-color: var(--remove-red); */
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  padding: 8px 16px;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
+  font-weight: 600;
+  transition: 0.2s;
 }
 
 .btn-remove:hover {
-  background-color: #7c160b;
+  background: rgba(239, 68, 68, 0.4);
 }
